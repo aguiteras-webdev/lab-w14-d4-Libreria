@@ -67,4 +67,4 @@ Ejecuta los archivos SQL en este orden:
 2. [`insercion_datos.sql`](insercion_datos.sql)
 3. [`consultas_ejercicio1.sql`](consultas_ejercicio1.sql)
 4. [`consultas_ejercicio2.sql`](consultas_ejercicio2.sql)
-- Precio máximo y mínimo.
+
