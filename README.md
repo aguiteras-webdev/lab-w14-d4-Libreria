@@ -1,61 +1,84 @@
-LAB autores-libros. BD Libreria
+# Biblioteca · Autores y libros
 
-1- Desde la parte visual (modelo EER) de WorkBench, crea dos tablas, autor y libro, donde un autor pueda tener varios libros. 
+Base de datos relacional desarrollada con **MySQL** para practicar la creación de tablas, relaciones, inserción de datos y consultas de agregación.
 
-Estos son los campos de las tablas:
+## Modelo de datos
 
-AUTOR: id autoincremental, nombre, apellido, pais
+La biblioteca está formada por dos entidades:
 
-LIBRO: id autoincremental, titulo, fecha (probar YEAR: libros a partir de 1901), genero, precio, id_autor (clave foránea)*
+```mermaid
+erDiagram
+	AUTOR ||--o{ LIBRO : escribe
+	AUTOR {
+		int id PK
+		varchar nombre
+		varchar apellido
+		varchar pais
+	}
+	LIBRO {
+		int id PK
+		varchar titulo
+		year fecha
+		varchar genero
+		decimal precio
+		int id_autor FK
+	}
+```
 
-* hacerla visualmente desde el diagrama EER. Fiajrse bien en el arbolito e uno a muchos
+Un autor puede escribir varios libros y cada libro pertenece a un autor mediante la clave foránea `id_autor`.
 
-icono a escoger: El tipo de enlace es de 1:n non-identifying relationship
+## Contenido
 
+| Elemento | Descripción |
+| --- | --- |
+| **6 autores** | Con nombre, apellido y país de origen |
+| **10 libros** | Con título, año, género, precio y autor |
+| **1 relación 1:N** | `autor.id` → `libro.id_autor` |
+| **Consultas SQL** | Agregaciones, medias, totales y agrupaciones |
 
-2- Insertar autores y libros (al menos 6 autores y 10 libros. Puedes pedirle los inserts a la IA)
+## Estructura del proyecto
 
-3- Intenta resolver estas queries:
+| Archivo | Contenido |
+| --- | --- |
+| [`creacion _tablas.sql`](creacion%20_tablas.sql) | Crea las tablas `autor` y `libro` |
+| [`insercion_datos.sql`](insercion_datos.sql) | Inserta los autores y libros de ejemplo |
+| [`consultas_ejercicio1.sql`](consultas_ejercicio1.sql) | Consultas con funciones de agregación |
+| [`consultas_ejercicio2.sql`](consultas_ejercicio2.sql) | Consultas con `GROUP BY` |
 
+## Cómo ejecutarlo
 
-FACIL
+1. Abre MySQL Workbench y crea o selecciona una base de datos, por ejemplo:
 
-Mostrar todos los libros del género "Fantasía" " (u otro) ordenados por precio de menor a mayor.
+   ```sql
+   CREATE DATABASE libreria;
+   USE libreria;
+   ```
 
-Mostrar todos los libros escritos por George Orwell.
+2. Ejecuta los scripts en este orden:
 
-Mostrar todos los libros publicados después del año 2000.
+   1. [`creacion _tablas.sql`](creacion%20_tablas.sql)
+   2. [`insercion_datos.sql`](insercion_datos.sql)
+   3. [`consultas_ejercicio1.sql`](consultas_ejercicio1.sql)
+   4. [`consultas_ejercicio2.sql`](consultas_ejercicio2.sql)
 
-Mostrar los libros cuyo precio sea superior a 20 .
+## Consultas practicadas
 
-Mostrar los libros cuyo título contenga la palabra "Harry" (u otra)
+### Funciones de agregación
 
-Mostrar los libros publicados entre 1980 y 2000.
+- Precio medio de todos los libros.
+- Número total de libros.
+- Precio máximo y mínimo.
+- Suma de todos los precios.
 
-Mostrar el título del libro y el nombre completo de su autor  -> dos tablas
+### Agrupaciones con `GROUP BY`
 
- 
-MEDIO-FACIL
+- Número de libros escritos por cada autor.
+- Número de libros por género.
+- Precio medio por género.
+- Precio medio de los libros de cada autor.
 
-Funciones de agregación
+## Tecnologías
 
-Calcular el precio medio de todos los libros.
-
-Contar cuántos libros hay en total.
-
-Calcular el precio máximo y mínimo de los libros.
-
-Calcular la suma de los precios de todos los libros.
-
- 
-MEDIO-DIFICIL
-
-GROUP BY
-
-Contar cuántos libros ha escrito cada autor.
-
-Mostrar el número de libros de cada género.
-
-Mostrar el precio medio de los libros de cada género.
-
-Mostrar cada autor junto con el precio medio de sus libros.
+- MySQL
+- MySQL Workbench
+- Modelo EER
