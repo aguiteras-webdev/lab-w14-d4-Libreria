@@ -1,31 +1,17 @@
--- Contar cuántos libros ha escrito cada autor
-SELECT 
-    a.nombre AS 'Nombre',
-    a.apellido AS 'Apellido',
-    COUNT(l.id) AS 'Cantidad de Libros'
-FROM autor a, libro l
-WHERE a.id = l.id_autor
-GROUP BY a.id, a.nombre, a.apellido;
+-- Calcular el precio medio de todos los libros
+SELECT ROUND(AVG(precio), 2) AS 'Precio Medio'
+FROM libro;
 
--- Mostrar el número de libros de cada género
-SELECT 
-    genero AS 'Género',
-    COUNT(*) AS 'Cantidad de Libros'
-FROM libro
-GROUP BY genero;
+-- Contar cuántos libros hay en total
+SELECT COUNT(*) AS 'Total de Libros'
+FROM libro;
 
--- Mostrar el precio medio de los libros de cada género
+-- Calcular el precio máximo y mínimo de los libros
 SELECT 
-    genero AS 'Género',
-    ROUND(AVG(precio), 2) AS 'Precio Medio (€)'
-FROM libro
-GROUP BY genero;
+    MAX(precio) AS 'Precio Máximo',
+    MIN(precio) AS 'Precio Mínimo'
+FROM libro;
 
--- Mostrar cada autor junto con el precio medio de sus libros
-SELECT 
-    a.nombre AS 'Nombre',
-    a.apellido AS 'Apellido',
-    ROUND(AVG(l.precio), 2) AS 'Precio Medio Libros'
-FROM autor a, libro l
-WHERE a.id = l.id_autor
-GROUP BY a.id, a.nombre, a.apellido;
+-- Calcular la suma de los precios de todos los libros
+SELECT SUM(precio) AS 'Suma Total Precios'
+FROM libro;
